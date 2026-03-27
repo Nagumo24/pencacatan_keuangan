@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catatan Keuangan Digital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Dompet Digital</h2>
+        
+        <div class="balance-container">
+            <h4>Saldo Anda</h4>
+            <h1 id="balance">Rp 0</h1>
+        </div>
+
+        <div class="inc-exp-container">
+            <div>
+                <h4>Pemasukan</h4>
+                <p id="money-plus" class="money plus">+Rp 0</p>
+            </div>
+            <div>
+                <h4>Pengeluaran</h4>
+                <p id="money-minus" class="money minus">-Rp 0</p>
+            </div>
+        </div>
+
+        <h3>Riwayat Transaksi</h3>
+        <ul id="list" class="list"></ul>
+
+        <h3>Tambah Transaksi Baru</h3>
+        <form id="form">
+            <div class="control">
+                <label>Deskripsi (Misal: Gaji, Sepatu Safety, PC Cooler)</label>
+                <input type="text" id="text" placeholder="Masukkan deskripsi..." required />
+            </div>
+            <div class="control">
+                <label>Jumlah (+ Pemasukan, - Pengeluaran)</label>
+                <input type="number" id="amount" placeholder="Contoh: 500000 atau -150000" required />
+            </div>
+            <button class="btn">Tambah Transaksi</button>
+
+            <button class="btn btn-download" onclick="downloadJSON()">Unduh File JSON</button>
+        </form>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
