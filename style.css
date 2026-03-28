@@ -90,3 +90,28 @@ input[type='text'], input[type='number'] {
     background-color: #2ecc71;
     margin-top: 10px;
 }
+
+.btn-import {
+    margin-top: 10px;
+    background-color: #fff;
+    border: 1px dashed #9c88ff;
+    cursor: pointer;
+}
+
+.list li {
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Pastikan teks dan angka sejajar tengah */
+    padding: 10px;
+    position: relative;
+    margin-bottom: 10px;
+    border-right: 5px solid #2ecc71;
+}
+
+.list li div {
+    display: flex;
+    flex-direction: column; /* Membuat teks deskripsi dan tanggal bertumpuk */
+}

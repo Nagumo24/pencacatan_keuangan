@@ -5,11 +5,12 @@ const list = document.getElementById('list');
 const form = document.getElementById('form');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount');
+const importFile = document.getElementById('importFile');
 
 // 1. READ: Ambil data dari LocalStorage saat load (atau array kosong jika baru)
 let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 
-// 2. CREATE: Fungsi tambah transaksi
+// 2. CREATE: Fungsi tambah transaksi (Update: Tambah Properti Date)
 function addTransaction(e) {
     e.preventDefault();
 
@@ -21,7 +22,12 @@ function addTransaction(e) {
     const transaction = {
         id: generateID(),
         text: text.value,
-        amount: +amount.value
+        amount: +amount.value,
+        date: new Date().toLocaleDateString('id-ID', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        }) // Format: 29 Mar 2026
     };
 
     transactions.push(transaction);
@@ -31,7 +37,6 @@ function addTransaction(e) {
     text.value = '';
     amount.value = '';
 }
-
 function generateID() {
     return Math.floor(Math.random() * 100000000);
 }
@@ -49,8 +54,13 @@ function addTransactionDOM(transaction) {
     const item = document.createElement('li');
 
     item.classList.add(transaction.amount < 0 ? 'minus' : 'plus');
+
     item.innerHTML = `
-        ${transaction.text} <span>${sign}Rp ${Math.abs(transaction.amount).toLocaleString('id-ID')}</span>
+        <div>
+            ${transaction.text} 
+            <small style="display: block; color: #777; font-size: 10px;">${transaction.date || ''}</small>
+        </div>
+        <span>${sign}${Math.abs(transaction.amount).toLocaleString('id-ID')}</span>
         <button class="delete-btn" onclick="removeTransaction(${transaction.id})">x</button>
     `;
 
@@ -94,3 +104,37 @@ function init() {
 
 init();
 form.addEventListener('submit', addTransaction);
+
+// ... (kode yang sudah ada tetap di sini)
+
+// 5. IMPORT: Fungsi untuk membaca file JSON yang diunggah
+function importJSON(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const importedData = JSON.parse(e.target.result);
+            
+            // Validasi sederhana apakah data berupa array
+            if (Array.isArray(importedData)) {
+                // Gabungkan dengan transaksi yang sudah ada atau ganti semua?
+                // Di sini kita ganti semua data dengan data dari file backup
+                transactions = importedData;
+                
+                updateLocalStorage();
+                init();
+                alert('Data berhasil di-import!');
+            } else {
+                alert('Format file JSON tidak sesuai.');
+            }
+        } catch (err) {
+            alert('Gagal membaca file. Pastikan file adalah JSON yang valid.');
+        }
+    };
+    reader.readAsText(file);
+}
+
+// Event Listener untuk input file
+importFile.addEventListener('change', importJSON);
