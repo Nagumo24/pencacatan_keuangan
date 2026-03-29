@@ -138,3 +138,26 @@ function importJSON(e) {
 
 // Event Listener untuk input file
 importFile.addEventListener('change', importJSON);
+
+// Menampilkan transaksi ke layar (Ganti isi fungsi ini di main.js)
+function addTransactionDOM(transaction) {
+    const sign = transaction.amount < 0 ? '-' : '+';
+    const item = document.createElement('li');
+
+    // Menambahkan class Bootstrap
+    item.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+    item.classList.add(transaction.amount < 0 ? 'minus' : 'plus');
+
+    item.innerHTML = `
+        <button class="delete-btn" onclick="removeTransaction(${transaction.id})">✕</button>
+        <div class="ms-2">
+            <span class="fw-bold d-block text-capitalize">${transaction.text}</span>
+            <small class="text-muted small" style="font-size: 0.75rem;">${transaction.date || ''}</small>
+        </div>
+        <span class="${transaction.amount < 0 ? 'text-danger' : 'text-success'} fw-bold">
+            ${sign}${Math.abs(transaction.amount).toLocaleString('id-ID')}
+        </span>
+    `;
+
+    list.appendChild(item);
+}

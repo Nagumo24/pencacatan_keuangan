@@ -1,117 +1,41 @@
-:root {
-    --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+/* style.css */
+.border-dashed {
+    border-style: dashed !important;
 }
 
-body {
-    background-color: #f7f7f7;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    justify-content: center;
-    padding: 30px;
+/* Indikator warna di samping list item */
+.list-group-item {
+    border-right: 5px solid #198754; /* Default Hijau */
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.container { width: 350px; }
-
-.inc-exp-container {
-    background-color: #fff;
-    box-shadow: var(--box-shadow);
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-    text-align: center;
+.list-group-item.minus {
+    border-right-color: #dc3545; /* Merah untuk pengeluaran */
 }
 
-.money { font-size: 20px; letter-spacing: 1px; margin: 5px 0; }
-.money.plus { color: #2ecc71; }
-.money.minus { color: #c0392b; }
-
-input[type='text'], input[type='number'] {
-    border: 1px solid #dedede;
-    border-radius: 2px;
-    display: block;
-    font-size: 16px;
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.btn {
-    cursor: pointer;
-    background-color: #9c88ff;
-    color: #fff;
-    border: 0;
-    display: block;
-    font-size: 16px;
-    padding: 10px;
-    width: 100%;
-}
-
-.list { list-style-type: none; padding: 0; margin-bottom: 40px; }
-.list li {
-    background-color: #fff;
-    box-shadow: var(--box-shadow);
-    color: #333;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    margin: 10px 0;
-    border-right: 5px solid #2ecc71;
-}
-.list li.minus { border-right: 5px solid #c0392b; }
-
-
-
+/* Tombol hapus yang muncul saat hover */
 .delete-btn {
-    cursor: pointer;
-    background-color: #e74c3c;
-    border: 0;
-    color: #fff;
-    font-size: 10px;
-    line-height: 10px;
-    padding: 2px 5px;
     position: absolute;
-    top: 50%;
     left: 0;
+    top: 50%;
     transform: translate(-100%, -50%);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    height: 100%;
 }
 
-.list li {
-    position: relative; /* Penting untuk tombol delete */
-}
-
-.list li:hover .delete-btn {
+.list-group-item:hover .delete-btn {
+    transform: translate(0, -50%);
     opacity: 1;
 }
 
-.btn-download {
-    background-color: #2ecc71;
-    margin-top: 10px;
-}
-
-.btn-import {
-    margin-top: 10px;
-    background-color: #fff;
-    border: 1px dashed #9c88ff;
-    cursor: pointer;
-}
-
-.list li {
-    background-color: #fff;
-    box-shadow: var(--box-shadow);
-    color: #333;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Pastikan teks dan angka sejajar tengah */
-    padding: 10px;
-    position: relative;
-    margin-bottom: 10px;
-    border-right: 5px solid #2ecc71;
-}
-
-.list li div {
-    display: flex;
-    flex-direction: column; /* Membuat teks deskripsi dan tanggal bertumpuk */
+.list-group-item:hover {
+    padding-left: 50px; /* Memberi ruang untuk tombol hapus saat hover */
 }
